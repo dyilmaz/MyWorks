@@ -11,7 +11,7 @@ public class Main {
 		
 		
 		UserService userService= new UserManager(new AbcUserDao());
-	    User user = new User("Derya","AKYÜZ","dyilmaz@engineer.com","123456");
+	    User user = new User("test","test","test@gmail.com","123456");
         userService.control(user);
 
 
