@@ -12,7 +12,7 @@ public class Main {
 		
 		UserService userService= new UserManager(new AbcUserDao());
 	    User user = new User("test","test","test@gmail.com","123456");
-        userService.control(user);
+        userService.add(user);
 
 
 	}
