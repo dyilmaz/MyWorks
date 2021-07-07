@@ -21,13 +21,13 @@ public class UserManager implements UserService {
 
 
 	@Override
-	public void control(User user) {
+	private boolean control(User user) {
 
 
 		if (user.getFirstname().length() <= 2 || user.getLastname().length() <= 2) {
 			System.out.println(" Ad ve soyad en az iki karakterden oluþmalýdýr.Tekrar deneyiniz.. ");
 			
-			//return;
+			return false;
 		}
 		
 
@@ -35,25 +35,21 @@ public class UserManager implements UserService {
 		if (user.getMail() == null || user.getMail().length() == 0 || user.getPasswd() == null
 				|| user.getPasswd().length() == 0) {
 			System.out.println("mail ve þifre boþ olamaz.Tekrar deneyiniz.. ");
-			//return;
+			return false;
 		}
 		
 			if (!user.getMail().matches(User.getRegex())) {
 				System.out.println(" Geçersiz email. Tekrar deneyiniz..");
-				//return;
+				return false;
 			}
-			else {
 			
-			System.out.println("Mailinize doðrulama gönderildi.. ");
-			user.setMail_flag(true);
-		}
 
 		if (user.getPasswd().length() != 6) {
 			System.out.println("Þifre en az 6 karakter olmalý. Tekrar deneyiniz..");
 			//return;
 
 		}
-
+	    return true;
 
 		 if(user.isMail_flag() ==true) {
 			 this.userDao.add(user);
@@ -72,8 +68,13 @@ public class UserManager implements UserService {
 
 	@Override
 	public void add(User user) {
+
 		
-		
+		if(control(user))
+		{
+			
+			 this.userDao.add(user);
+		}		
 	}
 
 }
